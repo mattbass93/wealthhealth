@@ -1,61 +1,197 @@
+/* 🌍 Mobile First : Style de base pour petits écrans */
 .employee-list {
     background: white;
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     width: 95%;
     max-width: 600px;
     margin: auto;
     text-align: center;
-  }
-  
-  h2 {
-    font-size: 1.4em;
-    margin-bottom: 1rem;
-  }
-  
-  table {
+}
+
+/* Titre */
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 0.8rem;
+}
+
+/* Barre de recherche et filtres */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+    align-items: center;
+}
+
+.controls select,
+.controls input {
+    padding: 0.4em;
+    font-size: 0.85em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.controls select {
+    width: auto;
+}
+
+/* Table */
+table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 0.6rem;
-    font-size: 0.9em;
-  }
-  
-  th {
+    font-size: 0.8em;
+}
+
+/* En-têtes de table */
+th {
     background-color: #f4f4f4;
-  }
-  
-  .back-button {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5em 1em;
-    font-size: 0.9em;
+    padding: 0.3rem;
+    font-size: 0.85em;
+}
+
+/* Cellules */
+td {
+    padding: 0.3rem;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+/* Bouton Retour */
+.back-button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.4em 0.9em;
+    font-size: 0.85em;
     color: white;
     background-color: #b33030;
     text-decoration: none;
     border-radius: 5px;
-  }
-  
-  .back-button:hover {
+    text-align: center;
+    width: max-content;
+}
+
+.back-button:hover {
     background-color: #902626;
-  }
-  
-  .delete-btn {
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.8rem;
+    gap: 0.4rem;
+}
+
+.pagination button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.4em 0.7em;
+    font-size: 0.8em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-weight: bold;
+}
+
+/* Bouton Supprimer */
+.delete-btn {
     background-color: #d9534f;
     color: white;
     border: none;
-    padding: 0.4em 0.8em;
-    font-size: 0.9em;
+    padding: 0.3em 0.6em;
+    font-size: 0.8em;
     cursor: pointer;
     border-radius: 5px;
-  }
-  
-  .delete-btn:hover {
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
     background-color: #c9302c;
-  }
-  
+}
+
+/* 📏 TABLETTE : Filtres en ligne, recherche à droite */
+@media (min-width: 600px) {
+    .employee-list {
+        max-width: 750px;
+        padding: 1rem;
+    }
+
+    .controls {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .controls select {
+        width: auto;
+        font-size: 0.9em;
+    }
+
+    .controls input {
+        width: auto;
+        font-size: 0.9em;
+        margin-left: auto; /* Déplace la barre de recherche à droite */
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 0.4rem;
+    }
+
+    .pagination button {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
+    }
+
+    .delete-btn {
+        font-size: 0.85em;
+        padding: 0.4em 0.8em;
+    }
+}
+
+/* 🖥️ GRAND ÉCRAN : Table plus aérée */
+@media (min-width: 900px) {
+    .employee-list {
+        max-width: 1000px;
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    table {
+        font-size: 1em;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+
+    .pagination button {
+        font-size: 1em;
+        padding: 0.6em 1.2em;
+    }
+
+    .delete-btn {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
+    }
+}

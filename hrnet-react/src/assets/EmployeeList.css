@@ -1,0 +1,61 @@
+.employee-list {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.4em;
+    margin-bottom: 1rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.6rem;
+    font-size: 0.9em;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  .back-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    color: white;
+    background-color: #b33030;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .back-button:hover {
+    background-color: #902626;
+  }
+  
+  .delete-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c9302c;
+  }
+  

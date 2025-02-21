@@ -1,0 +1,95 @@
+.create-employee {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-employee h2 {
+    text-align: center;
+  }
+  
+  .create-employee form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-employee label {
+    margin-top: 10px;
+  }
+
+  .create-employee input {
+    margin-bottom: 10px;
+  }
+  
+  .create-employee input,
+  .create-employee select {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #department,
+  #state {
+    margin-bottom: 10px;
+  }
+  
+  .create-employee button {
+    margin-top: 15px;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .create-employee button:hover {
+    background: #218838;
+  }
+  
+  .address {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  form {
+    margin-bottom: 20px;
+  }
+
+  .employee-list-link {
+    text-align: center;
+    display: block;
+    margin-bottom: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .employee-list-link:hover {
+    text-decoration: underline;
+  }
+  
+  .fill-form-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .fill-form-btn:hover {
+    background-color: #218838;
+  }
+  

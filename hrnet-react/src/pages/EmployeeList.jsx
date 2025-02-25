@@ -7,58 +7,58 @@ const EmployeeList = () => {
   const dispatch = useDispatch();
   const { employees, searchTerm, itemsPerPage, currentPage } = useSelector((state) => state.employees);
 
-  // Filtrer les employés en fonction de la recherche
+  // Filter employees based on search input
   const filteredEmployees = employees.filter((emp) =>
     `${emp.firstName} ${emp.lastName} ${emp.department} ${emp.city} ${emp.state}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
 
-  // Gestion de la pagination
+  // Pagination management
   const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const displayedEmployees = filteredEmployees.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="employee-list">
-      <h2>Employés Actuels</h2>
+      <h2>Current Employees</h2>
 
-      {/* Barre de recherche et filtres */}
+      {/* Search bar and filters */}
       <div className="controls">
         <label>
-          Afficher
+          Show
           <select value={itemsPerPage} onChange={(e) => dispatch(setItemsPerPage(Number(e.target.value)))}>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>
           </select>
-          entrées
+          entries
         </label>
 
         <input
           type="text"
-          placeholder="Rechercher un employé..."
+          placeholder="Search for an employee..."
           value={searchTerm}
           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
       </div>
 
-      {/* Table des employés */}
+      {/* Employee table */}
       {displayedEmployees.length === 0 ? (
-        <p>Aucun employé trouvé.</p>
+        <p>No employees found.</p>
       ) : (
         <table>
           <thead>
             <tr>
-              <th>Prénom</th>
-              <th>Nom</th>
-              <th>Date d&apos;embauche</th>
-              <th>Département</th>
-              <th>Rue</th>
-              <th>Ville</th>
-              <th>État</th>
-              <th>Code Postal</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Start Date</th>
+              <th>Department</th>
+              <th>Street</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Zip Code</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -75,7 +75,7 @@ const EmployeeList = () => {
                 <td>{emp.zipCode}</td>
                 <td>
                   <button className="delete-btn" onClick={() => dispatch(deleteEmployee(index))}>
-                    🗑️ Supprimer
+                    🗑️ Delete
                   </button>
                 </td>
               </tr>
@@ -87,17 +87,18 @@ const EmployeeList = () => {
       {/* Pagination */}
       <div className="pagination">
         <button onClick={() => dispatch(setCurrentPage(Math.max(currentPage - 1, 1)))} disabled={currentPage === 1}>
-          ⬅ Précédent
+          ⬅ Previous
         </button>
-        <span>Page {currentPage} sur {totalPages || 1}</span>
+        <span>Page {currentPage} of {totalPages || 1}</span>
         <button onClick={() => dispatch(setCurrentPage(Math.min(currentPage + 1, totalPages)))} disabled={currentPage === totalPages || totalPages === 0}>
-          Suivant ➡
+          Next ➡
         </button>
       </div>
 
-      <Link to="/" className="back-button">🏠 Retour à l&apos;accueil</Link>
+      <Link to="/" className="back-button">🏠 Back to Home</Link>
     </div>
   );
 };
 
 export default EmployeeList;
+

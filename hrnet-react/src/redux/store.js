@@ -1,11 +1,25 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 // État initial
+// État initial
 const initialState = {
     employees: JSON.parse(localStorage.getItem("employees")) || [],
     searchTerm: "",
     itemsPerPage: 10,
     currentPage: 1,
+    formData: {
+        firstName: "",
+        lastName: "",
+        dateOfBirth: "",
+        startDate: "",
+        street: "",
+        city: "",
+        state: "AL", // Premier état de la liste par défaut
+        zipCode: "",
+        department: "Sales",
+    },
+    errorMessage: "",
+    isModalOpen: false,
 };
 
 // Création du slice Redux
@@ -26,16 +40,30 @@ const employeeSlice = createSlice({
         },
         setItemsPerPage: (state, action) => {
             state.itemsPerPage = action.payload;
-            state.currentPage = 1; // Réinitialiser à la première page
+            state.currentPage = 1;
         },
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload;
         },
+        setFormData: (state, action) => {
+            state.formData = action.payload;
+        },
+        setErrorMessage: (state, action) => {  // 🔹 Ajout de la gestion des erreurs
+            state.errorMessage = action.payload;
+        },
+        setIsModalOpen: (state, action) => {  // 🔹 Ajout du contrôle de la modale
+            state.isModalOpen = action.payload;
+        },
     },
 });
 
-// Export des actions
-export const { addEmployee, deleteEmployee, setSearchTerm, setItemsPerPage, setCurrentPage } = employeeSlice.actions;
+// Export des actions Redux
+export const {
+    addEmployee, deleteEmployee,
+    setSearchTerm, setItemsPerPage, setCurrentPage,
+    setFormData, setErrorMessage, setIsModalOpen
+} = employeeSlice.actions;
+
 
 // Création du store Redux
 const store = configureStore({

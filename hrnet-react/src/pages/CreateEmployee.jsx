@@ -1,57 +1,108 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addEmployee } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmployee, setFormData, setErrorMessage, setIsModalOpen } from "../redux/store";
 import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
 import "../assets/CreateEmployee.css";
-import { states, initialFormState, autoFillData } from "../utils/data";
-import { handleInputChange, handleFormSubmit, resetForm } from "../utils/functions";
+import { states, departments, autoFillData } from "../utils/data";
+import { isValidBirthDate, isValidStartDate, isValidName, isValidCity, isValidDepartment } from "../utils/functions";
 
 const CreateEmployee = () => {
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState(initialFormState);
+  const { formData, errorMessage, isModalOpen } = useSelector((state) => state.employees);
+
+  const handleInputChange = (e) => {
+    dispatch(setFormData({ ...formData, [e.target.name]: e.target.value }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setErrorMessage("")); // Reset errors
+
+    // Validation du prénom
+    if (!isValidName(formData.firstName)) {
+      dispatch(setErrorMessage("The first name must start with an uppercase letter and contain only letters, hyphens, and spaces."));
+      return;
+    }
+
+    // Validation du nom
+    if (!isValidName(formData.lastName)) {
+      dispatch(setErrorMessage("The last name must start with an uppercase letter and contain only letters, hyphens, and spaces."));
+      return;
+    }
+
+    // Validation de la ville
+    if (!isValidCity(formData.city)) {
+      dispatch(setErrorMessage("The city must start with an uppercase letter and contain only letters and spaces."));
+      return;
+    }
+
+    // Validation du département (doit être un nombre)
+    if (!isValidDepartment(formData.department)) {
+      dispatch(setErrorMessage("The department must be a number."));
+      return;
+    }
+
+    // Validation de la date de naissance
+    if (!isValidBirthDate(formData.dateOfBirth)) {
+      dispatch(setErrorMessage("The employee must be at least 18 years old."));
+      return;
+    }
+
+    // Validation de la date de début
+    if (!isValidStartDate(formData.startDate)) {
+      dispatch(setErrorMessage("The start date cannot be in the future."));
+      return;
+    }
+
+    // Ajout de l'employé via Redux
+    dispatch(addEmployee(formData));
+    dispatch(setIsModalOpen(true)); // Ouvrir la modale
+
+    // Réinitialisation du formulaire
+    dispatch(setFormData(autoFillData));
+  };
 
   return (
     <div>
-      <h1>HRnet - Redux</h1>
+      <h1>HRnet - React</h1>
 
-      {/* Lien vers la liste des employés */}
       <Link to="/employees" className="employee-list-link">
-        📋 Voir la liste des employés
+        📋 View Employees
       </Link>
 
-      {/* Bouton pour remplir automatiquement */}
-      <button className="fill-form-btn" onClick={() => setFormData(autoFillData)}>
-        Remplir automatiquement
+      <button className="fill-form-btn" onClick={() => dispatch(setFormData(autoFillData))}>
+        Autofill Form
       </button>
 
       <div className="create-employee">
-        <h2>Créer un employé</h2>
-        <form onSubmit={(e) => handleFormSubmit(e, formData, dispatch, addEmployee, setIsModalOpen, () => resetForm(setFormData, initialFormState))}>
-          <label>Prénom :</label>
-          <input type="text" name="firstName" value={formData.firstName} onChange={(e) => handleInputChange(e, setFormData)} required />
+        <h2>Create Employee</h2>
 
-          <label>Nom :</label>
-          <input type="text" name="lastName" value={formData.lastName} onChange={(e) => handleInputChange(e, setFormData)} required />
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-          <label>Date de naissance :</label>
-          <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={(e) => handleInputChange(e, setFormData)} required />
+        <form onSubmit={handleFormSubmit}>
+          <label>First Name:</label>
+          <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
 
-          <label>Date de début :</label>
-          <input type="date" name="startDate" value={formData.startDate} onChange={(e) => handleInputChange(e, setFormData)} required />
+          <label>Last Name:</label>
+          <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+
+          <label>Date of Birth:</label>
+          <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required />
+
+          <label>Start Date:</label>
+          <input type="date" name="startDate" value={formData.startDate} onChange={handleInputChange} required />
 
           <fieldset className="address">
-            <legend>Adresse</legend>
+            <legend>Address</legend>
 
-            <label>Rue :</label>
-            <input type="text" name="street" value={formData.street} onChange={(e) => handleInputChange(e, setFormData)} required />
+            <label>Street:</label>
+            <input type="text" name="street" value={formData.street} onChange={handleInputChange} required />
 
-            <label>Ville :</label>
-            <input type="text" name="city" value={formData.city} onChange={(e) => handleInputChange(e, setFormData)} required />
+            <label>City:</label>
+            <input type="text" name="city" value={formData.city} onChange={handleInputChange} required />
 
-            <label>État :</label>
-            <select name="state" value={formData.state} onChange={(e) => handleInputChange(e, setFormData)} required>
+            <label>State:</label>
+            <select name="state" value={formData.state} onChange={handleInputChange} required>
               {states.map((st) => (
                 <option key={st.abbreviation} value={st.abbreviation}>
                   {st.name}
@@ -59,25 +110,24 @@ const CreateEmployee = () => {
               ))}
             </select>
 
-            <label>Code Postal :</label>
-            <input type="text" name="zipCode" value={formData.zipCode} onChange={(e) => handleInputChange(e, setFormData)} required />
+            <label>Zip Code:</label>
+            <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} required />
           </fieldset>
 
-          <label>Département :</label>
-          <select name="department" value={formData.department} onChange={(e) => handleInputChange(e, setFormData)}>
-            <option value="Sales">Ventes</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Ingénierie</option>
-            <option value="Human Resources">Ressources humaines</option>
-            <option value="Legal">Juridique</option>
+          <label>Department:</label>
+          <select name="department" value={formData.department} onChange={handleInputChange} required>
+            {departments.map((dept) => (
+              <option key={dept.value} value={dept.value}>
+                {dept.name}
+              </option>
+            ))}
           </select>
 
-          <button type="submit">Créer</button>
+          <button type="submit">Create</button>
         </form>
 
-        {/* Modale de confirmation */}
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <h2>Employé ajouté avec succès !</h2>
+        <Modal isOpen={isModalOpen} onClose={() => dispatch(setIsModalOpen(false))}>
+          <h2>Employee Successfully Added!</h2>
         </Modal>
       </div>
     </div>

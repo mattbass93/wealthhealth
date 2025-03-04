@@ -20,6 +20,7 @@ const initialState = {
     },
     errorMessage: "",
     isModalOpen: false,
+    sortConfig: { key: null, direction: null } // ✅ Ajout du tri
 };
 
 // Création du slice Redux
@@ -54,6 +55,9 @@ const employeeSlice = createSlice({
         setIsModalOpen: (state, action) => {  // 🔹 Ajout du contrôle de la modale
             state.isModalOpen = action.payload;
         },
+        setSortConfig: (state, action) => { // ✅ Ajout du tri
+            state.sortConfig = action.payload;
+        }
     },
 });
 
@@ -61,7 +65,7 @@ const employeeSlice = createSlice({
 export const {
     addEmployee, deleteEmployee,
     setSearchTerm, setItemsPerPage, setCurrentPage,
-    setFormData, setErrorMessage, setIsModalOpen
+    setFormData, setErrorMessage, setIsModalOpen, setSortConfig
 } = employeeSlice.actions;
 
 

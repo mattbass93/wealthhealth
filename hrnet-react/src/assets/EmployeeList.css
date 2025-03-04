@@ -123,6 +123,34 @@ td {
     background-color: #c9302c;
 }
 
+/* Ajout du style pour les icônes de tri */
+.sort-icons {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort-icon {
+    cursor: pointer;
+    opacity: 0.4; /* Transparence par défaut */
+    transition: opacity 0.3s;
+}
+
+.sort-icon.active {
+    opacity: 1; /* Bien visible quand activé */
+}
+
+.sort-icon.inactive {
+    opacity: 0.4; /* Transparence quand non activé */
+}
+
+/*.sort-name {
+    display: flex;
+    align-items: center;
+} */
+
+
 /* 📏 TABLETTE : Filtres en ligne, recherche à droite */
 @media (min-width: 600px) {
     .employee-list {
@@ -194,4 +222,7 @@ td {
         font-size: 0.9em;
         padding: 0.5em 1em;
     }
+
+    
+    
 }

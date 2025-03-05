@@ -1,0 +1,7 @@
+# Autoriser tous les robots à explorer tout le site
+User-agent: *
+Allow: /
+
+# Bloquer les fichiers sensibles (facultatif)
+Disallow: /admin/
+Disallow: /private/

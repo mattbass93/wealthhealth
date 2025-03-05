@@ -80,51 +80,52 @@ const CreateEmployee = () => {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <form onSubmit={handleFormSubmit}>
-          <label>First Name:</label>
-          <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
+          <label htmlFor="firstName">First Name:</label>
+          <input id="firstName" type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
 
-          <label>Last Name:</label>
-          <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+          <label htmlFor="lastName">Last Name:</label>
+          <input id="lastName" type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
 
-          <label>Date of Birth:</label>
-          <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required />
+          <label htmlFor="dateOfBirth">Date of Birth:</label>
+          <input id="dateOfBirth" type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required />
 
-          <label>Start Date:</label>
-          <input type="date" name="startDate" value={formData.startDate} onChange={handleInputChange} required />
+          <label htmlFor="startDate">Start Date:</label>
+          <input id="startDate" type="date" name="startDate" value={formData.startDate} onChange={handleInputChange} required />
 
           <fieldset className="address">
             <legend>Address</legend>
 
-            <label>Street:</label>
-            <input type="text" name="street" value={formData.street} onChange={handleInputChange} required />
+            <label htmlFor="street">Street:</label>
+            <input id="street" type="text" name="street" value={formData.street} onChange={handleInputChange} required />
 
-            <label>City:</label>
-            <input type="text" name="city" value={formData.city} onChange={handleInputChange} required />
+            <label htmlFor="city">City:</label>
+            <input id="city" type="text" name="city" value={formData.city} onChange={handleInputChange} required />
 
-            <label>State:</label>
-            <select name="state" value={formData.state} onChange={handleInputChange} required>
-              {states.map((st) => (
-                <option key={st.abbreviation} value={st.abbreviation}>
-                  {st.name}
+            <label htmlFor="state">State:</label>
+              <select id="state" name="state" value={formData.state} onChange={handleInputChange} required>
+                {states.map((st) => (
+                  <option key={st.abbreviation} value={st.abbreviation}>
+                    {st.name}
+                  </option>
+                ))}
+              </select>
+            
+            <label htmlFor="zipCode">Zip Code:</label>
+            <input id="zipCode" type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} required />
+          </fieldset>
+            
+          <label htmlFor="department">Department:</label>
+            <select id="department" name="department" value={formData.department} onChange={handleInputChange} required>
+              {departments.map((dept) => (
+                <option key={dept.value} value={dept.value}>
+                  {dept.name}
                 </option>
               ))}
             </select>
-
-            <label>Zip Code:</label>
-            <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} required />
-          </fieldset>
-
-          <label>Department:</label>
-          <select name="department" value={formData.department} onChange={handleInputChange} required>
-            {departments.map((dept) => (
-              <option key={dept.value} value={dept.value}>
-                {dept.name}
-              </option>
-            ))}
-          </select>
-
+          
           <button type="submit">Create</button>
         </form>
+
 
         <Modal isOpen={isModalOpen} onClose={() => dispatch(setIsModalOpen(false))}>
           <h2>Employee Successfully Added!</h2>

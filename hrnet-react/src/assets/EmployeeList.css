@@ -109,14 +109,13 @@ td {
 
 /* Bouton Supprimer */
 .delete-btn {
-    background-color: #d9534f;
+    background-color: #A42823;
     color: white;
     border: none;
     padding: 0.3em 0.6em;
     font-size: 0.8em;
     cursor: pointer;
     border-radius: 5px;
-    transition: background 0.3s;
 }
 
 .delete-btn:hover {

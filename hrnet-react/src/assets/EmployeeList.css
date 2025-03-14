@@ -1,4 +1,3 @@
-/* 🌍 Mobile First : Style de base pour petits écrans */
 .employee-list {
     background: white;
     padding: 0.8rem;
@@ -10,13 +9,13 @@
     text-align: center;
 }
 
-/* Titre */
+
 h2 {
     font-size: 1.2em;
     margin-bottom: 0.8rem;
 }
 
-/* Barre de recherche et filtres */
+
 .controls {
     display: flex;
     flex-direction: column;
@@ -39,21 +38,21 @@ h2 {
     width: auto;
 }
 
-/* Table */
+
 table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.5em;
 }
 
-/* En-têtes de table */
+
 th {
     background-color: #f4f4f4;
     padding: 0.3rem;
     font-size: 0.85em;
 }
 
-/* Cellules */
+
 td {
     padding: 0.3rem;
     border: 1px solid #ddd;
@@ -61,7 +60,7 @@ td {
     font-size: 0.85em;
 }
 
-/* Bouton Retour */
+
 .back-button {
     display: block;
     margin: 1rem auto;
@@ -79,7 +78,7 @@ td {
     background-color: #902626;
 }
 
-/* Pagination */
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -107,7 +106,7 @@ td {
     font-weight: bold;
 }
 
-/* Bouton Supprimer */
+
 .delete-btn {
     background-color: #A42823;
     color: white;
@@ -122,7 +121,7 @@ td {
     background-color: #c9302c;
 }
 
-/* Ajout du style pour les icônes de tri */
+
 .sort-icons {
     margin-top: 5px;
     display: flex;
@@ -132,16 +131,16 @@ td {
 
 .sort-icon {
     cursor: pointer;
-    opacity: 0.4; /* Transparence par défaut */
+    opacity: 0.4;
     transition: opacity 0.3s;
 }
 
 .sort-icon.active {
-    opacity: 1; /* Bien visible quand activé */
+    opacity: 1;
 }
 
 .sort-icon.inactive {
-    opacity: 0.4; /* Transparence quand non activé */
+    opacity: 0.4;
 }
 
 /*.sort-name {
@@ -150,7 +149,7 @@ td {
 } */
 
 
-/* 📏 TABLETTE : Filtres en ligne, recherche à droite */
+
 @media (min-width: 600px) {
     .employee-list {
         max-width: 750px;
@@ -171,7 +170,7 @@ td {
     .controls input {
         width: auto;
         font-size: 0.9em;
-        margin-left: auto; /* Déplace la barre de recherche à droite */
+        margin-left: auto;
     }
 
     table {
@@ -193,7 +192,7 @@ td {
     }
 }
 
-/* 🖥️ GRAND ÉCRAN : Table plus aérée */
+
 @media (min-width: 900px) {
     .employee-list {
         max-width: 1000px;

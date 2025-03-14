@@ -1,18 +1,17 @@
-/* Styles pour la modale */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* Fond opaque noir avec transparence */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Toujours au-dessus des autres éléments */
+    z-index: 1000;
   }
   
-  /* Contenu de la modale */
+
   .modal-content {
     background: white;
     padding: 10px;
@@ -20,13 +19,15 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 90%;
-    max-width: 400px; /* Largeur max */
+    max-width: 400px;
     position: relative;
   }
 
-  .modal-content > h2 {
+  .modal-content > p {
     margin-top : 25px;
-    margin-bottom: 25px;;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+    font-weight: bold;;
   }
 
   .close-btn {
@@ -34,7 +35,7 @@
     right: 10px;
   }
   
-  /* Bouton de fermeture */
+
   .modal-close {
     position: absolute;
     top: 10px;
@@ -45,7 +46,7 @@
     cursor: pointer;
   }
   
-  /* Effet d'animation */
+
   @keyframes modalFadeIn {
     from {
       opacity: 0;

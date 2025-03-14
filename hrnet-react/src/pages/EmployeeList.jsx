@@ -7,22 +7,19 @@ const EmployeeList = () => {
   const dispatch = useDispatch();
   const { employees, searchTerm, itemsPerPage, currentPage, sortConfig } = useSelector((state) => state.employees);
 
-  // Fonction pour gérer le tri
   const handleSort = (key, direction) => {
     if (sortConfig.key === key && sortConfig.direction === direction) {
-      return; // Ignore si on reclique sur la même icône déjà active
+      return;
     }
     dispatch(setSortConfig({ key, direction }));
   };
 
-  // Appliquer le tri sur les employés
   let sortedEmployees = [...employees];
   if (sortConfig.key) {
     sortedEmployees.sort((a, b) => {
       const aValue = a[sortConfig.key] || "";
       const bValue = b[sortConfig.key] || "";
 
-      // Vérifier si on trie par Zip Code (numérique)
       if (sortConfig.key === "zipCode") {
         return sortConfig.direction === "asc" ? aValue - bValue : bValue - aValue;
       }
@@ -31,14 +28,12 @@ const EmployeeList = () => {
     });
   }
 
-  // Filtrage des employés
   const filteredEmployees = sortedEmployees.filter((emp) =>
     `${emp.firstName} ${emp.lastName} ${emp.department} ${emp.city} ${emp.state} ${emp.zipCode} ${emp.dateOfBirth} ${emp.startDate}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
 
-  // Gestion de la pagination
   const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const displayedEmployees = filteredEmployees.slice(startIndex, startIndex + itemsPerPage);
@@ -47,7 +42,6 @@ const EmployeeList = () => {
     <div className="employee-list">
       <h2>Current Employees</h2>
 
-      {/* Barre de recherche et filtres */}
       <div className="controls">
         <label>
           Show
@@ -68,7 +62,6 @@ const EmployeeList = () => {
         />
       </div>
 
-      {/* Tableau des employés */}
       {displayedEmployees.length === 0 ? (
         <p>No employees found.</p>
       ) : (
@@ -132,7 +125,6 @@ const EmployeeList = () => {
         </table>
       )}
 
-      {/* Pagination */}
       <div className="pagination">
         <button onClick={() => dispatch(setCurrentPage(Math.max(currentPage - 1, 1)))} disabled={currentPage === 1}>
           ⬅ Previous

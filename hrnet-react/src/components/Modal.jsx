@@ -1,7 +1,7 @@
 
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types"; // Ajout pour la validation des props
-import "./Modal.css"; // Assure-toi d'avoir un fichier CSS pour le style
+import PropTypes from "prop-types";
+import "./Modal.css";
 
 const Modal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -17,11 +17,11 @@ const Modal = ({ isOpen, onClose, children }) => {
     );
 };
 
-// ✅ Validation des props
+
 Modal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,  // isOpen doit être un booléen obligatoire
-    onClose: PropTypes.func.isRequired, // onClose doit être une fonction obligatoire
-    children: PropTypes.node.isRequired // children doit être un élément React obligatoire
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired
 };
 
 export default Modal;

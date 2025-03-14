@@ -1,29 +1,18 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { initialFormState } from "../utils/data";
 
-// État initial
-// État initial
 const initialState = {
     employees: JSON.parse(localStorage.getItem("employees")) || [],
     searchTerm: "",
     itemsPerPage: 10,
     currentPage: 1,
-    formData: {
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        startDate: "",
-        street: "",
-        city: "",
-        state: "AL", // Premier état de la liste par défaut
-        zipCode: "",
-        department: "Sales",
-    },
+    formData: initialFormState,
     errorMessage: "",
     isModalOpen: false,
-    sortConfig: { key: null, direction: null } // ✅ Ajout du tri
+    sortConfig: { key: null, direction: null }
 };
 
-// Création du slice Redux
+
 const employeeSlice = createSlice({
     name: "employees",
     initialState,
@@ -49,19 +38,19 @@ const employeeSlice = createSlice({
         setFormData: (state, action) => {
             state.formData = action.payload;
         },
-        setErrorMessage: (state, action) => {  // 🔹 Ajout de la gestion des erreurs
+        setErrorMessage: (state, action) => {
             state.errorMessage = action.payload;
         },
-        setIsModalOpen: (state, action) => {  // 🔹 Ajout du contrôle de la modale
+        setIsModalOpen: (state, action) => {
             state.isModalOpen = action.payload;
         },
-        setSortConfig: (state, action) => { // ✅ Ajout du tri
+        setSortConfig: (state, action) => {
             state.sortConfig = action.payload;
         }
     },
 });
 
-// Export des actions Redux
+
 export const {
     addEmployee, deleteEmployee,
     setSearchTerm, setItemsPerPage, setCurrentPage,
@@ -69,7 +58,7 @@ export const {
 } = employeeSlice.actions;
 
 
-// Création du store Redux
+
 const store = configureStore({
     reducer: {
         employees: employeeSlice.reducer,

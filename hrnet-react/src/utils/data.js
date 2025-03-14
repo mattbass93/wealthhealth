@@ -1,5 +1,3 @@
-// Liste des États
-// Liste complète des États avec abréviations
 export const states = [
     { name: "Alabama", abbreviation: "AL" },
     { name: "Alaska", abbreviation: "AK" },
@@ -63,8 +61,6 @@ export const states = [
 ];
 
 
-
-// Liste des départements
 export const departments = [
     { name: "Sales", value: "1" },
     { name: "Marketing", value: "2" },
@@ -73,7 +69,6 @@ export const departments = [
     { name: "Legal", value: "5" }
 ];
 
-// Valeurs initiales du formulaire
 export const initialFormState = {
     firstName: "",
     lastName: "",
@@ -81,12 +76,11 @@ export const initialFormState = {
     startDate: "",
     street: "",
     city: "",
-    state: "AL", // Premier état de la liste par défaut
+    state: "AL",
     zipCode: "",
-    department: "1", // Par défaut, le premier département (Sales)
+    department: "1",
 };
 
-// Valeurs pour le remplissage automatique du formulaire
 export const autoFillData = {
     firstName: "John",
     lastName: "Doe",
@@ -96,5 +90,5 @@ export const autoFillData = {
     city: "Los Angeles",
     state: "CA",
     zipCode: "90001",
-    department: "3", // Correspond à Engineering
+    department: "3",
 };

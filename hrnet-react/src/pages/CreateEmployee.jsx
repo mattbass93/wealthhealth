@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
 import "../assets/CreateEmployee.css";
 import { states, departments, autoFillData } from "../utils/data";
-import { isValidBirthDate, isValidStartDate, isValidName, isValidCity, isValidDepartment } from "../utils/functions";
+import { isValidBirthDate, isValidStartDate, isValidName, isValidCity, isValidZipCode } from "../utils/functions";
 
 const CreateEmployee = () => {
   const dispatch = useDispatch();
@@ -16,50 +16,48 @@ const CreateEmployee = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(setErrorMessage("")); // Reset errors
+    dispatch(setErrorMessage(""));
 
-    // Validation du prénom
+
     if (!isValidName(formData.firstName)) {
       dispatch(setErrorMessage("The first name must start with an uppercase letter and contain only letters, hyphens, and spaces."));
       return;
     }
 
-    // Validation du nom
+
     if (!isValidName(formData.lastName)) {
       dispatch(setErrorMessage("The last name must start with an uppercase letter and contain only letters, hyphens, and spaces."));
       return;
     }
 
-    // Validation de la ville
+
     if (!isValidCity(formData.city)) {
       dispatch(setErrorMessage("The city must start with an uppercase letter and contain only letters and spaces."));
       return;
     }
 
-    // Validation du département (doit être un nombre)
-    if (!isValidDepartment(formData.department)) {
-      dispatch(setErrorMessage("The department must be a number."));
+ 
+    if (!isValidZipCode(formData.zipCode)) {
+      dispatch(setErrorMessage("The Zip Code must be a number."));
       return;
     }
 
-    // Validation de la date de naissance
+
     if (!isValidBirthDate(formData.dateOfBirth)) {
       dispatch(setErrorMessage("The employee must be at least 18 years old."));
       return;
     }
 
-    // Validation de la date de début
+
     if (!isValidStartDate(formData.startDate)) {
       dispatch(setErrorMessage("The start date cannot be in the future."));
       return;
     }
 
-    // Ajout de l'employé via Redux
-    dispatch(addEmployee(formData));
-    dispatch(setIsModalOpen(true)); // Ouvrir la modale
 
-    // Réinitialisation du formulaire
-    dispatch(setFormData(autoFillData));
+    dispatch(addEmployee(formData));
+    dispatch(setIsModalOpen(true));
+
   };
 
   return (
@@ -128,7 +126,7 @@ const CreateEmployee = () => {
 
 
         <Modal isOpen={isModalOpen} onClose={() => dispatch(setIsModalOpen(false))}>
-          <h2>Employee Successfully Added!</h2>
+          <p>Employee Successfully Added!</p>
         </Modal>
       </div>
     </div>

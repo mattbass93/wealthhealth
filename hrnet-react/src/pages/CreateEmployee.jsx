@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, setFormData, setErrorMessage, setIsModalOpen } from "../redux/store";
 import { Link } from "react-router-dom";
-import Modal from "../components/Modal";
+import Modal from "@mattbass93/modal_plugin";
+
 import "../assets/CreateEmployee.css";
 import { states, departments, autoFillData } from "../utils/data";
 import { isValidBirthDate, isValidStartDate, isValidName, isValidCity, isValidZipCode } from "../utils/functions";

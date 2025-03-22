@@ -1,8 +1,19 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { initialFormState } from "../utils/data";
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
-    employees: JSON.parse(localStorage.getItem("employees")) || [],
+    employees: [],
     searchTerm: "",
     itemsPerPage: 10,
     currentPage: 1,
@@ -12,18 +23,15 @@ const initialState = {
     sortConfig: { key: null, direction: null }
 };
 
-
 const employeeSlice = createSlice({
     name: "employees",
     initialState,
     reducers: {
         addEmployee: (state, action) => {
             state.employees.push(action.payload);
-            localStorage.setItem("employees", JSON.stringify(state.employees));
         },
         deleteEmployee: (state, action) => {
             state.employees = state.employees.filter((_, i) => i !== action.payload);
-            localStorage.setItem("employees", JSON.stringify(state.employees));
         },
         setSearchTerm: (state, action) => {
             state.searchTerm = action.payload;
@@ -50,19 +58,31 @@ const employeeSlice = createSlice({
     },
 });
 
-
 export const {
     addEmployee, deleteEmployee,
     setSearchTerm, setItemsPerPage, setCurrentPage,
     setFormData, setErrorMessage, setIsModalOpen, setSortConfig
 } = employeeSlice.actions;
 
+const persistConfig = {
+    key: "root",
+    storage,
+    whitelist: ["employees"],
+};
 
+const persistedReducer = persistReducer(persistConfig, employeeSlice.reducer);
 
 const store = configureStore({
     reducer: {
-        employees: employeeSlice.reducer,
+        employees: persistedReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
 });
 
+export const persistor = persistStore(store);
 export default store;
